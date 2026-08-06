@@ -153,6 +153,41 @@ class DigestEntry(BaseModel):
         from_attributes = True
 
 
+# ---- Outreach ----
+
+class OutreachLeadOut(BaseModel):
+    id: int
+    platform: str
+    profile_id: str
+    name: str
+    profile_url: Optional[str] = None
+    bio: Optional[str] = None
+    trigger_text: Optional[str] = None
+    topic: Optional[str] = None
+    contacted: bool
+    contacted_at: Optional[datetime] = None
+    message_sent: Optional[str] = None
+    created_at: datetime
+
+    class Config:
+        from_attributes = True
+
+
+class OutreachScanRequest(BaseModel):
+    command: str = "Scan for new AI readiness and ROI on AI leads on Twitter and LinkedIn"
+    scan_only: bool = True
+
+
+class OutreachScanResult(BaseModel):
+    summary: str
+    leads_found: int
+    messages_sent: int
+
+
+class SendDMRequest(BaseModel):
+    message: Optional[str] = None  # Custom message; uses default pitch if omitted
+
+
 # ---- Pagination ----
 
 class PaginatedResponse(BaseModel):

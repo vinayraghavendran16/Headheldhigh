@@ -6,7 +6,7 @@ from pathlib import Path
 
 from app.config import settings
 from app.database import Base, engine
-from app.api import users, resumes, jobs, matches, talent_pool, applications, digest
+from app.api import users, resumes, jobs, matches, talent_pool, applications, digest, outreach
 
 # Create database tables
 Base.metadata.create_all(bind=engine)
@@ -37,6 +37,7 @@ app.include_router(matches.router)
 app.include_router(talent_pool.router)
 app.include_router(applications.router)
 app.include_router(digest.router)
+app.include_router(outreach.router)
 
 
 @app.get("/health")

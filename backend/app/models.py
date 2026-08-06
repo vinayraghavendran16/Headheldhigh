@@ -93,6 +93,24 @@ class JobMatch(Base):
     job = relationship("JobPosting", back_populates="matches")
 
 
+class OutreachLead(Base):
+    """People spotted discussing ROI on AI or AI readiness on social media."""
+    __tablename__ = "outreach_leads"
+
+    id = Column(Integer, primary_key=True, index=True)
+    platform = Column(String(20), nullable=False)          # "twitter" | "linkedin"
+    profile_id = Column(String(512), nullable=False)       # Twitter user ID or LinkedIn public ID
+    name = Column(String(255), nullable=False)
+    profile_url = Column(String(1024), nullable=True)
+    bio = Column(Text, nullable=True)
+    trigger_text = Column(Text, nullable=True)             # The post/tweet that qualified them
+    topic = Column(String(255), nullable=True)             # "ROI on AI" | "AI readiness"
+    contacted = Column(Boolean, default=False)
+    contacted_at = Column(DateTime, nullable=True)
+    message_sent = Column(Text, nullable=True)
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+
 class Application(Base):
     __tablename__ = "applications"
 
